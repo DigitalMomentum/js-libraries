@@ -132,6 +132,37 @@ var GA4Helper = (function () {
 		return null;
 	}
 
+
+	var product = (function () {
+		function viewItem(price, itemId, itemName, itemCategories, item_brand) {
+			const qty = 1;
+	  
+			gtag('event', "view_item", {
+			  currency: "AUD",
+			  value: price * qty,
+			  items: [
+				{
+				  item_id: itemId,
+				  item_name: itemName,
+				  item_brand: item_brand,
+				  item_category: itemCategories[0],
+				  item_category2: itemCategories[1],
+				  item_category3: itemCategories[2],
+				  item_category4: itemCategories[3],
+				  item_category5: itemCategories[4],
+				  price: price,
+				  quantity: qty
+				}
+			  ]
+			});
+		}
+
+		return {
+			product
+		}
+	})();
+
+
 	//Replaces JQuery's Document.ready
 	function documentReady (callback) {
 		
