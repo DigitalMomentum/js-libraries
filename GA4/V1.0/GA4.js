@@ -158,7 +158,7 @@ var GA4Helper = (function () {
 		}
 
 		return {
-			product
+			viewItem
 		}
 	})();
 
@@ -187,7 +187,8 @@ var GA4Helper = (function () {
 		init,
 		reInitDataEvents,
 		sendPageView,
-        sendEvent
+        sendEvent,
+		products
 	}
 
 
