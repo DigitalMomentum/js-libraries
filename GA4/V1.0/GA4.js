@@ -133,7 +133,7 @@ var GA4Helper = (function () {
 	}
 
 
-	var product = (function () {
+	var products = (function () {
 		function viewItem(price, itemId, itemName, itemCategories, item_brand) {
 			const qty = 1;
 	  
