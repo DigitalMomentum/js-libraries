@@ -19,6 +19,7 @@ See Docs:
 Custom events use attributes to trigger either:
 -  [Reccomended Events](https://support.google.com/analytics/answer/9267735?sjid=4093258464454628144-AP)
  - [Enhanced Events](https://support.google.com/analytics/answer/12229021?sjid=4093258464454628144-AP)
+ - [Setup / configure custom events](https://www.lovesdata.com/blog/google-analytics-4-events#custom-events)
 
  Attributes for a "Click" look like the following:
 
