@@ -77,15 +77,15 @@ var GA4Helper = (function () {
 	function getAllDataAttributes(element) {
 		const dataAttributes = {};
 		const attributePrefix = 'data-ga-param-';
-
+		
 		// Iterate through all attributes of the element
 		for (const attr of element.attributes) {
 			if (attr.name.startsWith(attributePrefix)) {
-				//if (attr.name != "data-ga-click") {
+				
 					// Remove the "data-" prefix and store the value
 					const attributeName = attr.name.slice(attributePrefix.length);
 					dataAttributes[attributeName] = attr.value;
-				//}
+				
 			}
 		}
 
@@ -93,6 +93,11 @@ var GA4Helper = (function () {
 	}
 
     function sendEvent(eventType, attributes){
+
+		if(typeof(attributes["event_category"]) == "undefined"){
+			//In GA, the basic reports don't let you filter by event name, which is a pain. So if there is no category, set that instead so we can filter in reports
+			attributes["event_category"] = eventType;
+		}
         gtag("event", eventType, attributes);
     }
 
@@ -169,14 +174,14 @@ var GA4Helper = (function () {
 		// Check if the document is already loaded
 		if (document.readyState === "complete" || document.readyState === "interactive") {
 			// Document is already loaded
-			console.log("ready")
+			
 			callback();
 		} else {
 			// Listen for the readystatechange event
 			document.onreadystatechange = function () {
 				if (document.readyState === "complete") {
 					// Document is fully loaded
-					console.log("ready")
+					
 					callback();
 				}
 			};
