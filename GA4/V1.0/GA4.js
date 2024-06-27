@@ -59,16 +59,16 @@ var GA4Helper = (function () {
 
 	// Initialises the on click events for the data items
 	function initDataEvents() {
-		console.log("Init GA Data Events");
+		//console.log("Init GA Data Events");
 		
 		// Get all elements with the attribute data-ga-click
 		let elements = document.querySelectorAll("[data-ga-click]");
-		console.log(elements)
+		//console.log(elements)
 		// Attach a click event listener to each matching element
 		elements.forEach(element => {
-			console.log("element", element)
+			//console.log("element", element)
 			element.addEventListener("click", function () {
-				console.log("click")
+				//console.log("click")
 				// Get the value of the data-ga-click attribute
 				const eventType = this.getAttribute("data-ga-click");
 
