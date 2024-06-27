@@ -37,15 +37,22 @@ var GA4Helper = (function () {
 
 		let data = addUserIdToData({ 'send_page_view': !disableAutoPageView });
 
-		gtag('config', GA_ID, data);
-		gtag('config', AW_ID);
 
-
-		if (typeof GA_ID === 'undefined') {
+		if (typeof GA_ID === 'undefined' || GA_ID == null) {
 			console.warn("Google Analytics ID has not been set. Analytics will not work on this site.");
-			return;
+			//return;
+		}else{
+			gtag('config', GA_ID, data);
 		}
+
+
+		if(typeof AW_ID !== 'undefined' && AW_ID != null){
+			gtag('config', AW_ID);
+		}
+
 		
+		
+
 		documentReady(initDataEvents);
 	}
 
