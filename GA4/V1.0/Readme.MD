@@ -87,6 +87,7 @@ GA4Helper.sendPageView("https://www.example.com/", "Example Page Title", {
 ```
 
 
+
 # Events Naming conventions
 
 Use [object first approach](https://knowandconnect.com/handbooks/ga4-naming-convention)
