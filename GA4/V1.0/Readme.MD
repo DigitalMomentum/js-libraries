@@ -86,10 +86,6 @@ GA4Helper.sendPageView("https://www.example.com/", "Example Page Title", {
 });
 ```
 
-# Custom Events by Javascript:
-
-
-
 
 
 # Release Notes
