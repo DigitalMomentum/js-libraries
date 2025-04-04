@@ -28,15 +28,31 @@ Custom events use attributes to trigger either:
 - data-ga-click (Required): Triggers the event `select_content` on click
 - data-ga-*: All other params that will be included in the event post
 
-Check the Reccomended events for the params that should be passed. 
+Check the Recommended events for the params that should be passed. 
 
 # Custom Events by Javascript:
 Use the function `sendEvent()` just the same as you would with gtag.
 
 ```
-sendEvent("select_content", {
+GA4Helper.sendEvent("select_content", {
     "paramcontent_type": "product",
     "content_id", "yummy treat"
 });
 ```
 
+# Default Parameters
+You can set default parameters that will be sent with every event. This is useful for things like user ID, or other params that are always the same.
+
+Set the default parameters before the init function to make sure that the default params are sent as part of the page_view event_:
+```
+GA4Helper.addDefaultParam("user_id", "123"});
+GA4Helper.addDefaultParam("page_category", "products"});
+```
+
+# Release Notes
+
+
+## 2025-04-01
+ - Added support for default parameters
+ - Fixed sendPageView function. I don't think this worked previously.
+ - Added PageTitle param to sendPageView function

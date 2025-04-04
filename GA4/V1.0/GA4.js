@@ -20,6 +20,8 @@ var GA4Helper = (function () {
 	var GA_ID; //Google Analytics ID
 	var AW_ID;
 
+	var defaultParams = {} //Default params to send with every event including Pageview (If setup before init).
+
 
 	/* Initialise GA
 	 * Pass Analytics and Adwords ID's
@@ -57,9 +59,24 @@ var GA4Helper = (function () {
 	}
 
 
+	/* * Clear all default params that are sent with every request */
+    function clearDefaultParams() {
+        defaultParams = {};
+	}
+
+
+	/* 
+	* Add a default param to be sent with every request
+	*/
+	function addDefaultParam(paramName, value) {
+            defaultParams[paramName] = value;
+    }
+
+
+
+
 	// Initialises the on click events for the data items
 	function initDataEvents() {
-		//console.log("Init GA Data Events");
 		
 		// Get all elements with the attribute data-ga-click
 		let elements = document.querySelectorAll("[data-ga-click]");
@@ -99,7 +116,16 @@ var GA4Helper = (function () {
 		return dataAttributes;
 	}
 
-    function sendEvent(eventType, attributes){
+	function sendEvent(eventType, attributes) {
+		if (!attributes) {
+            attributes = {};
+		}
+
+        //Add the default params to the attributes
+        for (const [key, value] of Object.entries(defaultParams)) {
+            attributes[key] = value;
+        }
+		
 
 		if(typeof(attributes["event_category"]) == "undefined"){
 			//In GA, the basic reports don't let you filter by event name, which is a pain. So if there is no category, set that instead so we can filter in reports
@@ -118,9 +144,16 @@ var GA4Helper = (function () {
 
 
 	// Manually send a page view
-	function sendPageView (url) {
-		//Untested
-		gtag('config', GA_ID, { 'page_location': url });
+	function sendPageView(url, title) {
+		var params = {
+			page_location: url
+		}
+
+		if (title) {
+            params.page_title = title;
+		}
+
+        sendEvent("page_view", params);
 	}
 
 
@@ -200,7 +233,9 @@ var GA4Helper = (function () {
 		reInitDataEvents,
 		sendPageView,
         sendEvent,
-		products
+		products,
+		clearDefaultParams,
+		addDefaultParam
 	}
 
 
