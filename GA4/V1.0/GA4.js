@@ -14,7 +14,7 @@
 
 window.dataLayer = window.dataLayer || [];
 function gtag() { dataLayer.push(arguments); }
-gtag('js', new Date());
+gtag('js', new Date()); 
 
 var GA4Helper = (function () {
 	var GA_ID; //Google Analytics ID
