@@ -30,24 +30,67 @@ Custom events use attributes to trigger either:
 
 Check the Recommended events for the params that should be passed. 
 
-# Custom Events by Javascript:
-Use the function `sendEvent()` just the same as you would with gtag.
+
+# Functions
+
+### addDefaultParam(paramName, value)
+
+You can set default parameters that will be sent with every event. This is useful for things like user ID, or other params that are always the same.
+
+Set the default parameters before the init function to make sure that the default params are sent as part of the page_view event_:
+```
+GA4Helper.addDefaultParam("user_id", "123");
+GA4Helper.addDefaultParam("page_category", "products"});
+```
+
+
+### clearDefaultParams()
+
+Clears all the default params for any new events
+```
+GA4Helper.clearDefaultParams();
+```
+
+### init(googleAnalyticsId, [AdwordsId], [disableAutoPageView])
+
+Initialises the GA4Helper. This function should be called before any other functions other than `addDefaultParam()`.
+
+- disableAutoPageView: If set to true, the page_view event will not be sent automatically. This is useful if you are using a single page app and want to send the page_view event manually.
 
 ```
-GA4Helper.sendEvent("select_content", {
+GA4Helper.init('G-XXXXXXX', 'AW-XXXXXXXX', true);
+```
+
+
+### sendPageView(eventName, [parameters])
+
+Use the function `sendEvent()` just the same as you would with gtag.
+If `event_category` is not set, it will default to `eventName`
+
+```
+GA4Helper.sendEvent("click", {
+    "event_category": "button",
+    "event_label": "Shop Now",
     "paramcontent_type": "product",
     "content_id", "yummy treat"
 });
 ```
 
-# Default Parameters
-You can set default parameters that will be sent with every event. This is useful for things like user ID, or other params that are always the same.
 
-Set the default parameters before the init function to make sure that the default params are sent as part of the page_view event_:
+### sendPageView(url, [title], [parameters])
+This function will send a page_view event to GA4. It will also set the page_title and page_location params.
 ```
-GA4Helper.addDefaultParam("user_id", "123"});
-GA4Helper.addDefaultParam("page_category", "products"});
+GA4Helper.sendPageView("https://www.example.com/", "Example Page Title", {
+    "paramcontent_type": "product",
+    "content_id", "yummy treat"
+});
 ```
+
+# Custom Events by Javascript:
+
+
+
+
 
 # Release Notes
 

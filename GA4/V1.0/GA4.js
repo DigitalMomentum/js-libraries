@@ -116,7 +116,7 @@ var GA4Helper = (function () {
 		return dataAttributes;
 	}
 
-	function sendEvent(eventType, attributes) {
+	function sendEvent(eventName, attributes) {
 		if (!attributes) {
             attributes = {};
 		}
@@ -129,9 +129,9 @@ var GA4Helper = (function () {
 
 		if(typeof(attributes["event_category"]) == "undefined"){
 			//In GA, the basic reports don't let you filter by event name, which is a pain. So if there is no category, set that instead so we can filter in reports
-			attributes["event_category"] = eventType;
+			attributes["event_category"] = eventName;
 		}
-        gtag("event", eventType, attributes);
+		gtag("event", eventName, attributes);
     }
 
 	function reInitDataEvents() {
@@ -144,13 +144,20 @@ var GA4Helper = (function () {
 
 
 	// Manually send a page view
-	function sendPageView(url, title) {
+	function sendPageView(url, title, parameters) {
 		var params = {
 			page_location: url
 		}
 
 		if (title) {
             params.page_title = title;
+		}
+
+		//Add Additional params to the page view event
+		if (parameters) { 
+			for (const [key, value] of Object.entries(parameters)) {
+				params[key] = value;
+			}
 		}
 
         sendEvent("page_view", params);
