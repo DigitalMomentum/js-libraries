@@ -86,9 +86,27 @@ GA4Helper.sendPageView("https://www.example.com/", "Example Page Title", {
 });
 ```
 
-# Custom Events by Javascript:
 
+# Events Naming conventions
 
+Use [object first approach](https://knowandconnect.com/handbooks/ga4-naming-convention)
+
+Examples:
+
+User clicks the donate button
+Event Name: "donation"
+ - event_action = "click"
+ - page_category = "dog profile"
+
+User lands on the redirecting you to another site page
+Event Name: "donation"
+ - event_action = "redirected"
+ - page_category = "redirect notification"
+ 
+ User prints a poster
+ Event Name: "Poster"
+  - event_action = "Print Poster"
+  - page_category = "dog profile"
 
 
 
