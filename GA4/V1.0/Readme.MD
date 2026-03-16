@@ -5,7 +5,7 @@ Include `<script src="https://lib.digitalmomentum.com.au/GA4/V1.0/GA4.js"></scri
 
 # Initialize
 
-`GA4Helper.init('G-SXVZJH8F4S', 'AW-S79314105');`
+`GA4Helper.init('G-SXVZJH8F4S', 'AW-S79314105', false, false);`
 
 # Automatic Tagging
 You can add ID's or classes on links / buttons to trigger tagging rather than custom events. 

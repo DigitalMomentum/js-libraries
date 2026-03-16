@@ -21,15 +21,20 @@ var GA4Helper = (function () {
 	var AW_ID;
 
 	var defaultParams = {} //Default params to send with every event including Pageview (If setup before init).
-
+	var _enableDebug = false;
 
 	/* Initialise GA
 	 * Pass Analytics and Adwords ID's
 	 * Set disableAutoPageView if you want to manually set the page views yourself
+	 * Set enableDebug to true to log all data being sent to GA in the console for debugging purposes
 	 */
-	function init(googleAnalyticsId, AdwordsId, disableAutoPageView) {
+	function init(googleAnalyticsId, AdwordsId, disableAutoPageView, enableDebug) {
 		GA_ID = googleAnalyticsId;
 		AW_ID = AdwordsId;
+		if(typeof enableDebug === 'undefined'){
+			enableDebug = false;
+		}
+		_enableDebug = enableDebug;
 
 
 		if (typeof disableAutoPageView === 'undefined') {
@@ -42,14 +47,26 @@ var GA4Helper = (function () {
 
 		if (typeof GA_ID === 'undefined' || GA_ID == null) {
 			console.warn("Google Analytics ID has not been set. Analytics will not work on this site.");
+
+			logData("GA Enabled", false);
 			//return;
 		}else{
-			gtag('config', GA_ID, data);
+			
+			logData("GA ID: ", GA_ID);
+			logData("Adwords ID: ", AW_ID);
+			logData("Disable Auto Page View: ", disableAutoPageView);
+			logData("Default Config Data: ", data);
+
+			logData("GA Enabled", true);
+			logData('config', data);
 		}
 
 
 		if(typeof AW_ID !== 'undefined' && AW_ID != null){
+			logData("AW Enabled", true);
 			gtag('config', AW_ID);
+		}else{
+			logData("AW Enabled", false);
 		}
 
 		
@@ -131,11 +148,15 @@ var GA4Helper = (function () {
 			//In GA, the basic reports don't let you filter by event name, which is a pain. So if there is no category, set that instead so we can filter in reports
 			attributes["event_category"] = eventName;
 		}
+
+		logData("Event Tracked: ", { eventName, attributes });
+
 		gtag("event", eventName, attributes);
     }
 
 	function reInitDataEvents() {
 
+		log("Re Initialising Data Events");
 		//I think this works.. untested
 		$("[data-ga-click]").off("click");
 
@@ -184,6 +205,13 @@ var GA4Helper = (function () {
 		return null;
 	}
 
+	function log(...data){
+		if(typeof _enableDebug !== 'undefined' && _enableDebug === true){
+			console.log(...data);
+		}
+	}
+
+	
 
 	var products = (function () {
 		function viewItem(price, itemId, itemName, itemCategories, item_brand) {
@@ -234,6 +262,8 @@ var GA4Helper = (function () {
 			};
 		}
 	}
+
+
 
 	return {
 		init,
