@@ -58,7 +58,7 @@ var GA4Helper = (function () {
 			log("Default Config Data: ", data);
 
 			log("GA Enabled", true);
-			log('config', data);
+			gtag('config', data);
 		}
 
 
