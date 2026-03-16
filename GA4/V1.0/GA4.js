@@ -59,12 +59,8 @@ var GA4Helper = (function () {
 
 			log("GA Enabled", true);
 
-//if data is not a string, gtag seems to ignore it, so we need to stringify the data if there are additional params
-			if(typeof data === 'object') {
-				data = JSON.stringify(data);
-			}
-
-			gtag('config', data);
+			
+			gtag('config', GA_ID, data);
 		}
 
 
