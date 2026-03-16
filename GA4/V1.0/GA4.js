@@ -48,25 +48,25 @@ var GA4Helper = (function () {
 		if (typeof GA_ID === 'undefined' || GA_ID == null) {
 			console.warn("Google Analytics ID has not been set. Analytics will not work on this site.");
 
-			logData("GA Enabled", false);
+			log("GA Enabled", false);
 			//return;
 		}else{
 			
-			logData("GA ID: ", GA_ID);
-			logData("Adwords ID: ", AW_ID);
-			logData("Disable Auto Page View: ", disableAutoPageView);
-			logData("Default Config Data: ", data);
+			log("GA ID: ", GA_ID);
+			log("Adwords ID: ", AW_ID);
+			log("Disable Auto Page View: ", disableAutoPageView);
+			log("Default Config Data: ", data);
 
-			logData("GA Enabled", true);
-			logData('config', data);
+			log("GA Enabled", true);
+			log('config', data);
 		}
 
 
 		if(typeof AW_ID !== 'undefined' && AW_ID != null){
-			logData("AW Enabled", true);
+			log("AW Enabled", true);
 			gtag('config', AW_ID);
 		}else{
-			logData("AW Enabled", false);
+			log("AW Enabled", false);
 		}
 
 		
@@ -149,7 +149,7 @@ var GA4Helper = (function () {
 			attributes["event_category"] = eventName;
 		}
 
-		logData("Event Tracked: ", { eventName, attributes });
+		log("Event Tracked: ", { eventName, attributes });
 
 		gtag("event", eventName, attributes);
     }
